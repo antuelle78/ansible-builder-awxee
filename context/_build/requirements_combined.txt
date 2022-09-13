@@ -1,0 +1,14 @@
+botocore>=1.20.0  # from collection amazon.aws
+boto3>=1.17.0  # from collection amazon.aws
+ansible-builder  # from collection user
+certifi==2021.5.30  # from collection user
+chardet==4.0.0  # from collection user
+idna==2.10  # from collection user
+influxdb==5.3.1  # from collection user
+msgpack==1.0.2  # from collection user
+pymssql==2.2.1  # from collection user
+python-dateutil==2.8.1  # from collection user
+pytz==2021.1  # from collection user
+requests==2.25.1  # from collection user
+six==1.16.0  # from collection user
+urllib3==1.26.6  # from collection user

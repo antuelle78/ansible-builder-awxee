@@ -1,0 +1,17 @@
+openssl [test platform:rpm]  # from collection amazon.aws
+gcc [test platform:rpm]  # from collection amazon.aws
+python3-devel [test platform:rpm]  # from collection amazon.aws
+cryptsetup [platform:dpkg]  # from collection community.crypto
+cryptsetup [platform:rpm]  # from collection community.crypto
+openssh-client [platform:dpkg]  # from collection community.crypto
+openssh-clients [platform:rpm]  # from collection community.crypto
+openssl [platform:dpkg]  # from collection community.crypto
+openssl [platform:rpm]  # from collection community.crypto
+python3-cryptography [platform:dpkg]  # from collection community.crypto
+python3-cryptography [platform:rpm]  # from collection community.crypto
+python3-openssl [platform:dpkg]  # from collection community.crypto
+python3-pyOpenSSL [platform:rpm]  # from collection community.crypto
+python38-devel [platform:rpm compile]  # from collection user
+subversion [platform:rpm]  # from collection user
+subversion [platform:dpkg]  # from collection user
+git-lfs [platform:rpm]  # from collection user

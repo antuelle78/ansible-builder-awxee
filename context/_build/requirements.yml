@@ -1,0 +1,9 @@
+---
+
+collections:
+  - community.general
+  - community.rabbitmq
+  - amazon.aws
+  - community.windows
+  - community.crypto
+  - kubernetes.core
