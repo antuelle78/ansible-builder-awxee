@@ -12,4 +12,4 @@ six==1.16.0
 urllib3==1.26.6
 botocore==1.25.5
 boto3==1.22.5
-ansible
+ansible==6.1.0
