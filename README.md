@@ -8,6 +8,18 @@ To use it, activate the virtual environment by running:
 source builder/bin/activate
 ```
 
+**Ansible version:**
+
+The version of ansible used is set in the "execution-environment.yml" file i.e:
+
+```
+build_arg_defaults:
+
+EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:stable-2.12-devel'
+```
+
+Ensures that the base image has the latest release of ansible 2.12
+
 **Collection:**
 
 Edit the "requirements.yml" file to ensure that the collections required by your roles are included.
