@@ -32,8 +32,6 @@ RUN /usr/bin/python3 -m pip install --upgrade pip
 RUN yum install unzip -y
 COPY --from=quay.io/project-receptor/receptor:0.9.7 /usr/bin/receptor /usr/bin/receptor
 COPY --chown=1000:1000 ./configs /home/runner
-RUN cd /runner && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && /runner/aws/install -i /usr/local/aws-cli -b /usr/local/bin
-RUN curl -LO https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl && chmod +x kubectl && mv kubectl /usr/local/bin && aws eks update-kubeconfig --name prd-cluster-002
 RUN mkdir -p /var/run/receptor
 ADD run.sh /run.sh
 CMD /run.sh
