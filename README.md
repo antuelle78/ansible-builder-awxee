@@ -35,6 +35,13 @@ Edit the "requirements.yml" file to ensure that the collections required by your
 
 Edit the "requirements.txt" file to add/remove python modules
 
+**Build image:**
+
+Use the command below as a guideline for building you image replacing "username/repo:tag" with your details.
+
+```
+ansible-builder build --tag username/repo:tag --context ./context --container-runtime docker
+```
 **Python interpretor:**
 
 When running tasks delegated to localhost set the python interpreter to:
@@ -43,10 +50,3 @@ When running tasks delegated to localhost set the python interpreter to:
 ansible_python_interpreter: /usr/bin/python
 ```
 
-**Build image:**
-
-Use the command below as a guideline for building you image replacing "username/repo:tag" with your details.
-
-```
-ansible-builder build --tag username/repo:tag --context ./context --container-runtime docker
-```
