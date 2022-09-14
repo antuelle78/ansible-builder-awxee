@@ -27,6 +27,10 @@ EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
 ```
 Ensures that the base image has the current release of ansible-core
 
+Available tags can be found here:
+
+https://quay.io/repository/ansible/ansible-runner?tab=tags
+
 **Collection:**
 
 Edit the "requirements.yml" file to ensure that the collections required by your roles are included.
