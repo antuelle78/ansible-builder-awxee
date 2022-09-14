@@ -18,7 +18,14 @@ build_arg_defaults:
 EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:stable-2.12-devel'
 ```
 
-Ensures that the base image has the latest release of ansible 2.12
+Ensures that the base image has the latest release of ansible-core 2.12
+
+```
+build_arg_defaults:
+
+EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
+```
+Ensures that the base image has the current release of ansible-core
 
 **Collection:**
 
