@@ -5,6 +5,8 @@ FROM $EE_BASE_IMAGE as galaxy
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=
 USER root
 
+ADD _build/ansible.cfg ~/.ansible.cfg
+
 ADD _build /build
 WORKDIR /build
 
@@ -29,9 +31,8 @@ COPY --from=builder /output/ /output/
 RUN /output/install-from-bindep && rm -rf /output/wheels
 RUN alternatives --set python /usr/bin/python3
 RUN /usr/bin/python3 -m pip install --upgrade pip
-RUN yum install unzip -y
 COPY --from=quay.io/project-receptor/receptor:0.9.7 /usr/bin/receptor /usr/bin/receptor
-COPY --chown=1000:1000 ./configs /home/runner
+RUN chown 1000:1000 /home/runner
 RUN mkdir -p /var/run/receptor
 ADD run.sh /run.sh
 CMD /run.sh

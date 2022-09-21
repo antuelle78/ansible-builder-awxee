@@ -7,3 +7,4 @@ collections:
   - community.windows
   - community.crypto
   - kubernetes.core
+  - awx.awx
