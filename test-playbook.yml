@@ -1,0 +1,12 @@
+---
+- name: Hello World and Date/Time Playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Display Hello World
+      debug:
+        msg: "Hello World"
+
+    - name: Display current date and time
+      debug:
+        msg: "Current date and time: {{ ansible_date_time.iso8601 }}"

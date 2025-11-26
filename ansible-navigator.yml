@@ -1,0 +1,6 @@
+---
+ansible-navigator:
+  execution-environment:
+    image: antuelle78/awx-ee:latest
+    pull:
+      policy: never
