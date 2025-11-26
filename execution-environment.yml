@@ -1,22 +1,44 @@
 ---
-version: 1
-build_arg_defaults:
-  EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:latest'
+version: 3
+
+images:
+  base_image:
+    name: registry.access.redhat.com/ubi9/python-311:latest
+
 dependencies:
   galaxy: requirements.yml
   python: requirements.txt
-  #system: bindep.txt
+  system: bindep.txt
+  ansible_core:
+    package_pip: ansible-core>=2.16.1
+  ansible_runner:
+    package_pip: ansible-runner>=2.4.0
 
-ansible_config: 'ansible.cfg'
+additional_build_files:
+  - src: ansible.cfg
+    dest: configs
+  - src: run.sh
+    dest: scripts
 
 additional_build_steps:
-  append:
-    - RUN alternatives --set python /usr/bin/python3
+  prepend_base:
+    - USER root
+    - RUN ln -sf /opt/app-root/bin/python3 /usr/bin/python3
+    - RUN /usr/bin/python3 -m ensurepip --upgrade
     - RUN /usr/bin/python3 -m pip install --upgrade pip
-    - COPY --from=quay.io/project-receptor/receptor:0.9.7 /usr/bin/receptor /usr/bin/receptor
-    - RUN chown 1000:1000 /home/runner
-    - RUN mkdir -p /var/run/receptor
-    - ADD run.sh /run.sh
-    - CMD /run.sh
-    - USER 1000
+    # Install EPEL and git-lfs
+    - RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm || true
+    - RUN dnf install -y git git-lfs
+  append_base:
+    # Create runner user if it doesn't exist
+    - RUN if ! id -u runner > /dev/null 2>&1; then useradd -u 1000 -g 0 -d /home/runner -m runner; fi
+  prepend_final:
+    - COPY --from=quay.io/project-receptor/receptor:latest /usr/bin/receptor /usr/bin/receptor
+    - USER root
+    - RUN mkdir -p /var/run/receptor && chown 1000:0 /var/run/receptor
+    - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
+    - COPY _build/scripts/run.sh /run.sh
+    - RUN chmod +x /run.sh
     - RUN git lfs install
+  # append_final:
+    # User 1000 is set automatically by ansible-builder at the end

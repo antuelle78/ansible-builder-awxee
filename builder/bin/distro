@@ -1,4 +1,4 @@
-#!/home/ghost/ansible-builder/builder/bin/python3
+#!/home/ghost/bin/git_archives/ansible-builder-awxee/builder/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
