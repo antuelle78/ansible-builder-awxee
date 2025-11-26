@@ -70,6 +70,8 @@ podman run --rm -it awx-ee
 - `community.windows` - Windows automation
 - `community.crypto` - Cryptographic operations
 - `community.docker` - Docker container management
+- `community.vmware` - VMware vSphere automation
+- `ansible.posix` - POSIX system administration
 
 ## ⚙️ Configuration
 

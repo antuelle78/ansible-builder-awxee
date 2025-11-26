@@ -11,3 +11,5 @@ collections:
   # awx.awx might depend on kubernetes.core
   # - awx.awx
   - community.docker
+  - community.vmware
+  - ansible.posix
