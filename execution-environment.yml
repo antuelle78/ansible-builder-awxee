@@ -10,25 +10,18 @@ dependencies:
   python: requirements.txt
   system: bindep.txt
   ansible_core:
-    package_pip: ansible-core>=2.16.1
+    package_pip: ansible-core>=2.18.0
   ansible_runner:
     package_pip: ansible-runner>=2.4.0
 
 additional_build_files:
   - src: ansible.cfg
     dest: configs
-  - src: run.sh
-    dest: scripts
 
 additional_build_steps:
   prepend_base:
     - USER root
-    - RUN ln -sf /opt/app-root/bin/python3 /usr/bin/python3
-    - RUN /usr/bin/python3 -m ensurepip --upgrade
-    - RUN /usr/bin/python3 -m pip install --upgrade pip
-    # Install EPEL and git-lfs
-    - RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm || true
-    - RUN dnf install -y git git-lfs
+    - RUN ln -sf /opt/app-root/bin/python3 /usr/bin/python3 && /usr/bin/python3 -m ensurepip --upgrade && /usr/bin/python3 -m pip install --upgrade pip
   append_base:
     # Create runner user if it doesn't exist
     - RUN if ! id -u runner > /dev/null 2>&1; then useradd -u 1000 -g 0 -d /home/runner -m runner; fi
@@ -37,8 +30,7 @@ additional_build_steps:
     - USER root
     - RUN mkdir -p /var/run/receptor && chown 1000:0 /var/run/receptor
     - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
-    - COPY _build/scripts/run.sh /run.sh
+    - COPY run.sh /run.sh
     - RUN chmod +x /run.sh
-    - RUN git lfs install
   # append_final:
     # User 1000 is set automatically by ansible-builder at the end

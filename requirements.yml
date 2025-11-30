@@ -1,15 +1,3 @@
 ---
-
 collections:
   - community.general
-  - community.rabbitmq
-  - amazon.aws
-  - community.windows
-  - community.crypto
-  # kubernetes.core requires openshift-clients rpm which is not available in UBI9/EPEL9 without subscription
-  # - kubernetes.core
-  # awx.awx might depend on kubernetes.core
-  # - awx.awx
-  - community.docker
-  - community.vmware
-  - ansible.posix

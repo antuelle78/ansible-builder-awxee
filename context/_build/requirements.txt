@@ -1,10 +1,3 @@
-ansible>=10.0.0
+ansible-core>=2.18.0
+ansible-runner>=2.4.0
 requests>=2.31.0
-boto3>=1.34.0
-botocore>=1.34.0
-python-dateutil>=2.8.2
-pytz>=2024.1
-influxdb>=5.3.1
-pymssql>=2.2.8
-ansible-lint>=6.0.0
-yamllint>=1.30.0

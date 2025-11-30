@@ -3,7 +3,7 @@ ARG PYCMD="/usr/bin/python3"
 ARG PKGMGR_PRESERVE_CACHE=""
 ARG ANSIBLE_GALAXY_CLI_COLLECTION_OPTS=""
 ARG ANSIBLE_GALAXY_CLI_ROLE_OPTS=""
-ARG ANSIBLE_INSTALL_REFS="ansible-core>=2.16.1 ansible-runner>=2.4.0"
+ARG ANSIBLE_INSTALL_REFS="ansible-core>=2.18.0 ansible-runner>=2.4.0"
 ARG PKGMGR="/usr/bin/dnf"
 
 # Base build stage
@@ -21,11 +21,7 @@ ARG PKGMGR
 COPY _build/scripts/ /output/scripts/
 COPY _build/scripts/entrypoint /opt/builder/bin/entrypoint
 USER root
-RUN ln -sf /opt/app-root/bin/python3 /usr/bin/python3
-RUN /usr/bin/python3 -m ensurepip --upgrade
-RUN /usr/bin/python3 -m pip install --upgrade pip
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm || true
-RUN dnf install -y git git-lfs
+RUN ln -sf /opt/app-root/bin/python3 /usr/bin/python3 && /usr/bin/python3 -m ensurepip --upgrade && /usr/bin/python3 -m pip install --upgrade pip
 RUN /output/scripts/pip_install $PYCMD
 RUN $PYCMD -m pip install --no-cache-dir $ANSIBLE_INSTALL_REFS
 RUN if ! id -u runner > /dev/null 2>&1; then useradd -u 1000 -g 0 -d /home/runner -m runner; fi
@@ -84,9 +80,8 @@ COPY --from=quay.io/project-receptor/receptor:latest /usr/bin/receptor /usr/bin/
 USER root
 RUN mkdir -p /var/run/receptor && chown 1000:0 /var/run/receptor
 COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
-COPY _build/scripts/run.sh /run.sh
+COPY run.sh /run.sh
 RUN chmod +x /run.sh
-RUN git lfs install
 RUN /output/scripts/check_ansible $PYCMD
 
 COPY --from=galaxy /usr/share/ansible /usr/share/ansible
